@@ -18,6 +18,6 @@ This will generate libsnpehelper.so in build folder.
 
 ## 3. Move libsnpehelper.so to the Tutorials Folder
 ```
-mv libsnpehelper.so ../Tutorials/
+mv libsnpehelper.so ../Tutorials/snpe
 ```
 Now, libsnpehelper.so is ready for use in the Tutorials folder. 🚀
