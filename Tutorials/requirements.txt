@@ -1,0 +1,11 @@
+numpy==1.24.4
+torch
+torchvision
+torchaudio
+pybind11
+opencv-python
+matplotlib
+Flask
+blinker>=1.6.2
+paho-mqtt
+pygobject==3.48.2
