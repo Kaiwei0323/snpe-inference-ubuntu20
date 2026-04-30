@@ -30,6 +30,9 @@ class WebcamPipeline(BasePipeline):
 
         self.appsink.set_property("emit-signals", True)
         self.appsink.set_property("sync", False)
+        # Keep latency low by dropping old frames if consumer is slow.
+        self.appsink.set_property("max-buffers", 1)
+        self.appsink.set_property("drop", True)
         self.appsink.connect("new-sample", self.on_new_sample)
 
     def create(self):

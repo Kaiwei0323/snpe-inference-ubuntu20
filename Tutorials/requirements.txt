@@ -6,6 +6,6 @@ pybind11
 opencv-python
 matplotlib
 Flask
-blinker>=1.6.2
+blinker==1.8.2
 paho-mqtt
 pygobject==3.48.2

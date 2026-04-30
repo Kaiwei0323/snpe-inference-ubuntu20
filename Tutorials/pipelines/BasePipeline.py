@@ -49,12 +49,24 @@ class BasePipeline:
             height = caps.get_structure(0).get_value("height")
             channels = 3
 
-            buffer_size = buffer.get_size()
-            np_array = np.ndarray(shape=(height, width, channels),
-                                  dtype=np.uint8,
-                                  buffer=buffer.extract_dup(0, buffer_size))
+            # Map the buffer to avoid an extra copy. We still take exactly ONE
+            # copy into a standalone NumPy array before unmapping.
+            ok, map_info = buffer.map(Gst.MapFlags.READ)
+            if not ok:
+                print("Failed to map buffer")
+                return Gst.FlowReturn.ERROR
 
-            np_array = np.copy(np_array)
+            try:
+                buffer_size = buffer.get_size()
+                expected_size = int(height) * int(width) * channels
+                if buffer_size < expected_size:
+                    print(f"Unexpected buffer size: {buffer_size} < {expected_size}")
+                    return Gst.FlowReturn.ERROR
+
+                view = np.frombuffer(map_info.data, dtype=np.uint8, count=expected_size)
+                np_array = view.reshape((height, width, channels)).copy()
+            finally:
+                buffer.unmap(map_info)
             
             if self.image_queue.full():
                 self.image_queue.get()

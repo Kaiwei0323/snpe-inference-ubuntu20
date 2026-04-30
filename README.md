@@ -66,15 +66,15 @@ Password: oelinux123
 ```bash
 apt install git
 cd /home/aim/Documents
-git clone https://github.com/Kaiwei0323/snpe-inference-ubuntu20.git
-chmod +777 -R snpe-inference-ubuntu20
+git clone https://github.com/Kaiwei0323/snpe-inference-ubuntu20.git SNPE_Flask
+chmod +777 -R SNPE_Flask
 ```
 
 ---
 
 ### 3. Navigate to the Project Directory
 ```bash
-cd snpe-inference-ubuntu20/Tutorials
+cd SNPE_Flask/Tutorials
 ```
 
 ---
@@ -85,6 +85,7 @@ chmod +x setup.sh
 ./setup.sh
 chmod +x env.sh
 ./env.sh
+source ~/.bashrc
 ```
 
 > 🔍 `setup.sh` installs SNPE SDKs and video files, `env.sh` installs dependencies, sets up SNPE paths, and configures the environment for Flask + SNPE.
